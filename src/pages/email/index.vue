@@ -78,7 +78,7 @@ export default {
     imageFile2: '',
     play: false,
     cards: [
-      { color: 'blue', title: '대`한~민국 NO1 ㉪ㅏ ,.㉨ㅣ., 노', html: `<div style="font-size: 20px;">안@전 빠^른 일*대일 전용 (계)=좌 입+{출}<br><br>신!뢰 보~안 시—스템 1·위  검#증/된 우리 계열 더-킹<br><br></div><a style="font-size:20px; color: #e91e63;" href="http://www.abcmm999.com">대한~민국 NO1 ㉪ㅏ ,.㉨ㅣ., 노</a>` },
+      { color: 'blue', title: '대`한~민국 NO1 ㉪ㅏ ,.㉨ㅣ., 노', html: `<div style="font-size: 20px;">안@전 빠^른 일*대일 전용 (계)=좌 입+{출}<br><br>신!뢰 보~안 시—스템 1·위  검#증/된 우리 계열 더-킹<br><br></div><div style="font-size:20px; color: #e91e63;">www。abcmm999。com</div>` },
       { color: 'pink', title: '', html: '' },
       { color: 'purple', title: '', html: '' }
     ],
@@ -145,7 +145,6 @@ export default {
           if (rawFile.status === 200 || rawFile.status === 0) {
             const text = rawFile.responseText
             this.ids = text.split(/[\r\n]+/)
-            console.log(this)
           }
         }
       }
@@ -190,16 +189,23 @@ export default {
             title: this.cards[0].title
           }
           axios.post('http://localhost:3000/email', params).then(res => {
-            const info = res.data.info
-            this.datas.push({
-              to: info.envelope.from,
-              from: info.envelope.to[0],
-              err: null,
-              is: true
-            })
-            this.ids.splice(0, 1)
-          }).catch(err => {
-            console.log(err)
+            const info = res.data
+            if (res.status === 200) {
+              this.datas.push({
+                to: info.envelope.from,
+                from: info.envelope.to[0],
+                err: null,
+                is: true
+              })
+              this.ids.splice(0, 1)
+            } else {
+              this.datas.push({
+                to: `${params.id}@daum.net`,
+                from: `${params.to}@naver.com`,
+                err: `${info.responseCode}`,
+                is: false
+              })
+            }
           })
         })
         this.play = false
