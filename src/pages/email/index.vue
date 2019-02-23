@@ -67,11 +67,8 @@ import axios from 'axios'
 
 export default {
   data: () => ({
-    ids: ['ckqlss'],
-    idpw: [{
-      id: 'ckqlssf',
-      pw: 'Admin520!@$'
-    }],
+    ids: [],
+    idpw: [],
     datas: [],
     imageName: '',
     imageUrl: '',
@@ -81,9 +78,7 @@ export default {
     imageFile2: '',
     play: false,
     cards: [
-      { color: 'blue', title: '대`한~민국 NO1 ㉪ㅏ ,.㉨ㅣ., 노', html: `<div style="font-size: 20px;">안@전 빠^른 일*대일 전용 (계)=좌 입+{출}<br><br>
-      신!뢰 보~안 시—스템 1·위  검#증/된 우리 계열 더-킹<br><br></div>
-      <a href="www.tc2019.site"><img src="https://onca2080.com/data/editor/1810/6f52e2de395f9104095cad6799977fd4_1540216266_2865.gif"></a>` },
+      { color: 'blue', title: '대`한~민국 NO1 ㉪ㅏ ,.㉨ㅣ., 노', html: `<div style="font-size: 20px;">안@전 빠^른 일*대일 전용 (계)=좌 입+{출}<br><br>신!뢰 보~안 시—스템 1·위  검#증/된 우리 계열 더-킹<br><br></div><a style="font-size:20px; color: #e91e63;" href="http://www.abcmm999.com">대한~민국 NO1 ㉪ㅏ ,.㉨ㅣ., 노</a>` },
       { color: 'pink', title: '', html: '' },
       { color: 'purple', title: '', html: '' }
     ],
@@ -195,19 +190,14 @@ export default {
           axios.post('http://localhost:3000/email', params).then(res => {
             const info = res.data.info
             this.datas.push({
-              to: info.envelope.to[0],
-              from: info.envelope.from,
+              to: info.envelope.from,
+              from: info.envelope.to[0],
               err: null,
               is: true
             })
             this.ids.splice(0, 1)
           }).catch(err => {
-            this.datas.push({
-              to: err.body.to[0],
-              from: err.body.from,
-              err: err.err,
-              is: false
-            })
+            console.log(err)
           })
         })
         this.play = false
