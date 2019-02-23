@@ -161,9 +161,14 @@ export default {
             const ntext = text.split('\n')
             const arr = []
             ntext.map(res => {
-              const id = res.split(' ')[0]
-              const pw = res.split(' ')[1]
-              arr.push({ id, pw })
+              const lines = _.compact(res.split(/[\r\n]+/))
+              lines.forEach(function(line) {
+                // Clean up whitespace/comments, and split into fields
+                const auth = line.replace(/\s*#.*|^\s*|\s*$/g, '').split(/\s+/)
+                const id = auth[0]
+                const pw = auth[1]
+                arr.push({ id, pw })
+              })
             })
             this.idpw = arr
           }
