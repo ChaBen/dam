@@ -54,7 +54,6 @@
           <td class="text-xs-center">{{ props.index+1 }}</td>
           <td class="text-xs-center">{{ props.item.to }}</td>
           <td class="text-xs-center">{{ props.item.from }}</td>
-          <td class="text-xs-center">{{ props.item.title }}</td>
           <td class="text-xs-center">{{ props.item.err }}</td>
           <td class="text-xs-center"><span :class="{ active: !props.item.is }" class="is-mail"/></td>
         </template>
@@ -190,16 +189,13 @@ export default {
             id: sid.id,
             pw: sid.pw,
             to: id,
-            title: this.cards[0].title,
             html: this.cards[0].html
           }
-          axios.post('http://127.0.0.1:3000/email', params).then(res => {
-            const body = res.data.body
+          axios.post('http://localhost:3000/email', params).then(res => {
             const info = res.data.info
             this.datas.push({
               to: info.envelope.to[0],
               from: info.envelope.from,
-              title: body.title,
               err: null,
               is: true
             })
@@ -208,7 +204,6 @@ export default {
             this.datas.push({
               to: err.body.to[0],
               from: err.body.from,
-              title: err.body.title,
               err: err.err,
               is: false
             })

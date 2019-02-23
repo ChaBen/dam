@@ -61,7 +61,7 @@ export default {
   methods: {
     search() {
       if (this.$refs.form.validate()) {
-        axios.get(`http://127.0.0.1:3000/getid/${this.query}`).then(async res => {
+        axios.get(`http://localhost:3000/getid/${this.query}`).then(async res => {
           const rHtml = $(res.data)
           // const aText = rHtml.find('.m-tcol-c .board-box tr[align="center"] .p-nick > a').attr('onclick')
           const cId = String(rHtml.find('.box-g .thm > a').attr('href')).replace('/CafeHistoryView.nhn?clubid=', '')
@@ -75,7 +75,7 @@ export default {
               id: cId,
               page: index + 1
             }
-            const data = (await axios.post(`http://127.0.0.1:3000/member`, param)).data
+            const data = (await axios.post(`http://localhost:3000/member`, param)).data
             const table = $(data).find('.m-tcol-c .board-box tr[align="center"]')
             const users = []
             table.each(function() {
