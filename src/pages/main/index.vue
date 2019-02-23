@@ -69,7 +69,6 @@ export default {
             alert('존재하지 않는 cafe 입니다')
             return
           }
-          const users = []
           const page = this.page || 1
           for (let index = 0; index < page; index++) {
             const param = {
@@ -78,12 +77,13 @@ export default {
             }
             const data = (await axios.post(`http://127.0.0.1:3000/member`, param)).data
             const table = $(data).find('.m-tcol-c .board-box tr[align="center"]')
+            const users = []
             table.each(function() {
               const id = String($(this).find('.p-nick > a').attr('onclick')).split("'")[1]
               users.push(id)
             })
+            this.ids = _.uniq(_.compact(users))
           }
-          this.ids = _.uniq(_.compact(users))
         })
       }
     }
