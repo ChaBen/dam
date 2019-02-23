@@ -81,7 +81,9 @@ export default {
     imageFile2: '',
     play: false,
     cards: [
-      { color: 'blue', title: '대한민국 NO1  더킹 ㅋ`ㅏㅈ`ㅣ노', html: '안@전 신^뢰 보!안 시스템 1위 \n신규 쿠&폰 3%~10%받으세요\n접속  <a href="http://daum.net">daum</a>' },
+      { color: 'blue', title: '대`한~민국 NO1 ㉪ㅏ ,.㉨ㅣ., 노', html: `<div style="font-size: 20px;">안@전 빠^른 일*대일 전용 (계)=좌 입+{출}<br><br>
+      신!뢰 보~안 시—스템 1·위  검#증/된 우리 계열 더-킹<br><br></div>
+      <a href="www.tc2019.site"><img src="https://onca2080.com/data/editor/1810/6f52e2de395f9104095cad6799977fd4_1540216266_2865.gif"></a>` },
       { color: 'pink', title: '', html: '' },
       { color: 'purple', title: '', html: '' }
     ],
@@ -89,7 +91,6 @@ export default {
       { text: '개수', align: 'center', sortable: true, value: 'index' },
       { text: '보낸아이디', align: 'center', sortable: false, value: 'id' },
       { text: '받은아이디', align: 'center', sortable: false, value: 'sid' },
-      { text: '타이틀', align: 'center', sortable: false, value: 'title' },
       { text: '애러코드', align: 'center', sortable: false, value: 'err' },
       { text: '성공여부', align: 'center', sortable: false, value: 'is' }
     ]
@@ -184,12 +185,12 @@ export default {
         this.ids.map(id => {
           const idNum = this.random(this.idpw.length)
           const sid = this.idpw[idNum]
-          console.log(id)
           const params = {
             id: sid.id,
             pw: sid.pw,
             to: id,
-            html: this.cards[0].html
+            html: this.cards[0].html,
+            title: this.cards[0].title
           }
           axios.post('http://localhost:3000/email', params).then(res => {
             const info = res.data.info
