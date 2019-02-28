@@ -31,15 +31,18 @@
       </v-card>
     </v-flex>
     <v-flex xs8>
-      <v-card-title class="title">아이디 ({{ ids.length }})</v-card-title>
-      <v-textarea
-        v-model="spids"
-        class="auto-scroll"
-        row-height="30"
-        rows="20"
-        solo
-        no-resize
-        label="ids"/>
+      <v-card class="card--flex-toolbar" height="100%">
+        <v-card-title class="title">아이디 ({{ ids.length }})</v-card-title>
+        <v-textarea
+          v-model="spids"
+          :disabled="loading"
+          class="auto-scroll"
+          row-height="30"
+          rows="20"
+          solo
+          no-resize
+          label="ids"/>
+      </v-card>
     </v-flex>
   </v-layout>
 </template>
@@ -51,9 +54,10 @@ import $ from 'jQuery'
 
 export default {
   data: () => ({
+    loading: true,
     valid: true,
     page: null,
-    query: null,
+    query: 'ric01',
     ids: []
   }),
   computed: {
@@ -83,7 +87,7 @@ export default {
               page: index + 1
             }
             const data = (await axios.post(`http://localhost:3000/member`, param)).data
-            const table = $(data).find('.m-tcol-c .board-box tr[align="center"]')
+            const table = $(data).find('#main-area > .article-board:last table tr')
             const users = []
             table.each(function() {
               const id = String($(this).find('.p-nick > a').attr('onclick')).split("'")[1]
@@ -91,6 +95,7 @@ export default {
             })
             this.ids = this.ids.concat(_.uniq(_.compact(users)))
           }
+          this.loading = false
         })
       }
     }
