@@ -82,7 +82,7 @@ export default {
               const id = String($(this).find('.p-nick > a').attr('onclick')).split("'")[1]
               users.push(id)
             })
-            this.ids = _.uniq(_.compact(users))
+            this.ids = this.ids.concat(_.uniq(_.compact(users)))
           }
         })
       }
