@@ -64,14 +64,14 @@
 export default {
   data: () => ({
     items: [
-      { icon: 'email', text: 'Email', link: '/email' },
-      { icon: 'history', text: 'Frequently contacted' },
-      { icon: 'content_copy', text: 'Duplicates' },
-      { icon: 'settings', text: 'Settings' },
-      { icon: 'chat_bubble', text: 'Send feedback' },
-      { icon: 'help', text: 'Help' },
-      { icon: 'phonelink', text: 'App downloads' },
-      { icon: 'keyboard', text: 'Go to the old version' }
+      { icon: 'email', text: 'Email', link: '/email' }
+      // { icon: 'history', text: 'Frequently contacted' },
+      // { icon: 'content_copy', text: 'Duplicates' },
+      // { icon: 'settings', text: 'Settings' },
+      // { icon: 'chat_bubble', text: 'Send feedback' },
+      // { icon: 'help', text: 'Help' },
+      // { icon: 'phonelink', text: 'App downloads' },
+      // { icon: 'keyboard', text: 'Go to the old version' }
     ]
   }),
   computed: {
