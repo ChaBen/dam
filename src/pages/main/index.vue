@@ -50,7 +50,7 @@ export default {
   data: () => ({
     valid: true,
     page: null,
-    query: 'girlsingerand',
+    query: null,
     ids: []
   }),
   computed: {
