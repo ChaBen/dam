@@ -215,6 +215,9 @@ export default {
             _.remove(this.ids, (obj) => {
               return obj === this.ids[a]
             })
+            _.remove(this.idpw, (obj) => {
+              return obj.id === v.id
+            })
             break
           } else {
             if (info.data.responseCode === 535 || info.data.responseCode === 452) {
