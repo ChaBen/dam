@@ -57,7 +57,7 @@ export default {
     loading: true,
     valid: true,
     page: null,
-    query: 'ric01',
+    query: null,
     ids: []
   }),
   computed: {
