@@ -31,12 +31,15 @@
       </v-card>
     </v-flex>
     <v-flex xs8>
-      <v-card height="100%">
-        <v-card-title class="title">아이디 ({{ ids.length }})</v-card-title>
-        <v-list class="auto-scroll">
-          <v-list-tile v-for="(item, index) in ids" :key="index">{{ item }}</v-list-tile>
-        </v-list>
-      </v-card>
+      <v-card-title class="title">아이디 ({{ ids.length }})</v-card-title>
+      <v-textarea
+        v-model="spids"
+        class="auto-scroll"
+        row-height="30"
+        rows="20"
+        solo
+        no-resize
+        label="ids"/>
     </v-flex>
   </v-layout>
 </template>
@@ -56,6 +59,10 @@ export default {
   computed: {
     cafepar() {
       return Math.floor(this.cafeLen / 10)
+    },
+    spids() {
+      const txt = this.ids.toString()
+      return txt.replace(/,/gi, '\n')
     }
   },
   methods: {
