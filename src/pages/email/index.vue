@@ -197,7 +197,7 @@ export default {
       for (const a in this.ids) {
         for (const b in this.idpw) {
           const v = this.idpw[b]
-          const titleLen = this.cards.title.split('@').length
+          const titleLen = this.titles.split('@').length
           const htmlLen = this.cards.html.split('@').length
           const len = titleLen + htmlLen
           const dian = Math.floor((Math.random() * this.dian.length))
