@@ -35,6 +35,7 @@
           <template slot="items" slot-scope="props">
             <td class="text-xs-center">{{ props.index+1 }}</td>
             <td class="text-xs-center">{{ props.item.to }}</td>
+            <td class="text-xs-center">{{ props.item.title }}</td>
             <td class="text-xs-center">{{ props.item.from }}</td>
             <td class="text-xs-center">{{ props.item.err }}</td>
             <td class="text-xs-center"><span :class="{ active: !props.item.is }" class="is-mail"/></td>
@@ -102,6 +103,7 @@ export default {
       { text: '개수', align: 'center', sortable: true, value: 'index' },
       { text: '보낸아이디', align: 'center', sortable: false, value: 'id' },
       { text: '받은아이디', align: 'center', sortable: false, value: 'sid' },
+      { text: '타이틀', align: 'center', sortable: false, value: 'title' },
       { text: '애러코드', align: 'center', sortable: false, value: 'err' },
       { text: '성공여부', align: 'center', sortable: false, value: 'is' }
     ]
@@ -214,13 +216,14 @@ export default {
             pw: v.pw,
             to: this.ids[a],
             html: this.cards.html,
-            title: this.cards.title
+            title: this.titles[rant]
           }
           const info = await axios.post('http://localhost:3000/email', params)
           if (info.status === 200) {
             this.datas.unshift({
               to: info.data.envelope.from,
               from: info.data.envelope.to[0],
+              title: params.title,
               err: null,
               is: true
             })
@@ -241,6 +244,7 @@ export default {
               to: `${params.id}@daum.net`,
               from: `${params.to}@naver.com`,
               err: `${info.data.responseCode}`,
+              title: params.title,
               is: false
             })
           }
