@@ -203,7 +203,7 @@ export default {
           const dian = Math.floor((Math.random() * this.dian.length))
           for (let index = 0; index < len; index++) {
             const ran = Math.floor((Math.random() * this.sText.split(' ').length))
-            const rant = Math.floor((Math.random() * this.titles))
+            const rant = Math.floor((Math.random() * this.titles.length))
             const sTxt = this.sText.split(' ')[ran]
             this.titles[rant] = this.titles[rant].replace('@', sTxt)
             this.cards.html = this.cards.html.replace('@', sTxt)
