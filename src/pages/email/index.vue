@@ -28,7 +28,22 @@
     </v-flex>
     <v-flex xs8>
       <v-layout column fill-height>
-        <v-flex style="height: calc(100% - 106px)">
+        <v-flex>
+          <v-card>
+            <v-layout row pa-3>
+              <v-flex xs4 text-xs-center>
+                <span class="title">보낸수: <span class="blue--text">{{ statis.send | cur }}개</span></span>
+              </v-flex>
+              <v-flex xs4 text-xs-center>
+                <span class="title">실패수: <span class="pink--text">{{ statis.failure | cur }}개</span></span>
+              </v-flex>
+              <v-flex xs4 text-xs-center>
+                <span class="title">페센트: <span class="orange--text">{{ statis.percent }}%</span></span>
+              </v-flex>
+            </v-layout>
+          </v-card>
+        </v-flex>
+        <v-flex style="height: calc(100% - 65px)">
           <v-card>
             <v-btn v-if="btn" class="center" fab dark small absolute top right color="indigo" @click="sendEmail">
               <v-icon dark>play_arrow</v-icon>
@@ -44,17 +59,6 @@
                 <td class="text-xs-center">{{ props.item.title }}</td>
                 <td class="text-xs-center">{{ props.item.err }}</td>
                 <td class="text-xs-center"><span :class="{ active: !props.item.is }" class="is-mail"/></td>
-              </template>
-            </v-data-table>
-          </v-card>
-        </v-flex>
-        <v-flex>
-          <v-card>
-            <v-data-table :headers="head" :items="statis" class="fixed-header v-table__overflow" style="max-height: calc(100vh - 144px); backface-visibility: hidden;" hide-actions>
-              <template slot="items" slot-scope="props">
-                <td class="text-xs-center">{{ props.item.send | cur }}개</td>
-                <td class="text-xs-center">{{ props.item.failure | cur }}개</td>
-                <td class="text-xs-center">{{ props.item.percent }}%</td>
               </template>
             </v-data-table>
           </v-card>
@@ -124,7 +128,7 @@ export default {
       신@뢰 보~안 시—스템 1·위  100%검@증/된 우리 계열 더-킹<br><br>
       @ 추천 사/이트 복사 >>  <span style="color: #E91E63">wcw6%com</span></div>`
     },
-    statis: [{ send: 0, failure: 0, percent: 0 }],
+    statis: { send: 0, failure: 0, percent: 0 },
     head: [
       { text: '보낸수', align: 'center', sortable: false, value: 'send' },
       { text: '실패수', align: 'center', sortable: false, value: 'failure' },
@@ -139,9 +143,6 @@ export default {
       { text: '성공여부', align: 'center', sortable: false, value: 'is', width: 80 }
     ]
   }),
-  created() {
-    this.statis[0].send = this.statis[0].send++
-  },
   methods: {
     pickFile() {
       this.$refs.image.click()
@@ -265,8 +266,8 @@ export default {
               err: null,
               is: true
             })
-            this.statis[0].send = this.statis[0].send++
-            this.statis[0].percent = Math.floor((this.statis[0].send / this.ids.length) * 100)
+            this.statis.send += 1
+            this.statis.percent = Math.floor((this.statis.send / this.ids.length) * 100)
             _.remove(this.ids, (obj) => {
               return obj === this.ids[a]
             })
@@ -275,7 +276,7 @@ export default {
             })
             break
           } else {
-            this.statis[0].failure = this.statis[0].failure++
+            this.statis.failure += 1
             if (info.data.responseCode === 535 || info.data.responseCode === 452) {
               _.remove(this.idpw, (obj) => {
                 return obj.id === v.id
