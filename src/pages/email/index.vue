@@ -229,7 +229,7 @@ export default {
         return
       }
       for (const a in this.ids) {
-        if (this.play) return
+        if (!this.play) return
         for (const b in this.idpw) {
           const v = this.idpw[b]
           const rant = Math.floor((Math.random() * this.titles.length))
