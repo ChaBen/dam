@@ -6,6 +6,9 @@
         <v-btn class="center" fab dark small absolute top right color="indigo" @click="pickFile">
           <v-icon dark>add</v-icon>
         </v-btn>
+        <v-btn fab dark small absolute top right color="indigo" @click="copy(ids)">
+          <v-icon dark>copyright</v-icon>
+        </v-btn>
         <v-subheader class="dam-subheader">아이디<v-badge right>{{ ids.length }}</v-badge></v-subheader>
         <v-divider/>
         <v-list class="auto-scroll">
@@ -18,6 +21,9 @@
         <input ref="image2" type="file" style="display: none" @change="onFilePicked2">
         <v-btn class="center" fab dark small absolute top right color="indigo" @click="pickFile2">
           <v-icon dark>add</v-icon>
+        </v-btn>
+        <v-btn fab dark small absolute top right color="indigo" @click="copy(idpw)">
+          <v-icon dark>copyright</v-icon>
         </v-btn>
         <v-subheader class="dam-subheader">아이디 + 비밀번호<v-badge right>{{ idpw.length }}</v-badge></v-subheader>
         <v-divider/>
@@ -286,6 +292,14 @@ export default {
     stopSend() {
       this.play = false
       this.btn = true
+    },
+    copy(val) {
+      const t = document.createElement('textarea')
+      document.body.appendChild(t)
+      t.value = val.toString().replace(/,/gi, '\n')
+      t.select()
+      document.execCommand('copy')
+      document.body.removeChild(t)
     }
   }
 }
