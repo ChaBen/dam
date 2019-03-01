@@ -131,14 +131,17 @@ export default {
       { text: '페센트', align: 'center', sortable: false, value: 'percent' }
     ],
     headers: [
-      { text: '개수', align: 'center', sortable: true, value: 'index' },
+      { text: '개수', align: 'center', sortable: false, value: 'index', width: 80 },
       { text: '보낸아이디', align: 'center', sortable: false, value: 'id' },
       { text: '받은아이디', align: 'center', sortable: false, value: 'sid' },
       { text: '타이틀', align: 'center', sortable: false, value: 'title' },
-      { text: '애러코드', align: 'center', sortable: false, value: 'err' },
-      { text: '성공여부', align: 'center', sortable: false, value: 'is' }
+      { text: '애러코드', align: 'center', sortable: false, value: 'err', width: 80 },
+      { text: '성공여부', align: 'center', sortable: false, value: 'is', width: 80 }
     ]
   }),
+  created() {
+    this.statis[0].send = this.statis[0].send++
+  },
   methods: {
     pickFile() {
       this.$refs.image.click()
@@ -231,8 +234,8 @@ export default {
       }
       this.btn = false
       for (const a in this.ids) {
-        if (!this.play) return
         for (const b in this.idpw) {
+          if (!this.play) return
           const v = this.idpw[b]
           const rant = Math.floor((Math.random() * this.titles.length))
           const titleLen = this.titles[rant].split('@').length
