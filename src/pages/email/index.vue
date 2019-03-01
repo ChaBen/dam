@@ -239,13 +239,13 @@ export default {
           // const titleLen = this.titles[rant].split('@').length
           // const htmlLen = this.cards.html.split('@').length
           // const len = titleLen + htmlLen
-          // const dian = Math.floor((Math.random() * this.dian.length))
           // for (let index = 0; index < len; index++) {
           //   const ran = Math.floor((Math.random() * this.sText.split(' ').length))
           //   const sTxt = this.sText.split(' ')[ran]
           //   this.titles[rant] = this.titles[rant].replace('@', sTxt)
           //   this.cards.html = this.cards.html.replace('@', sTxt)
           // }
+          const dian = Math.floor((Math.random() * this.dian.length))
           this.title = this.title.replace('@', this.ids[a])
           this.cards.html = this.cards.html.replace('%com', `${this.dian[dian]}com`)
           const params = {
