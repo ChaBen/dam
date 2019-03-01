@@ -9,6 +9,9 @@ html, body, #app, .full-height {
 .max-height {
   max-height: calc(100% - 64px);
 }
+.two-height {
+  height: 50%;
+}
 .relative {
   position: relative;
 }
@@ -81,6 +84,68 @@ html, body, #app, .full-height {
     }
     .v-text-field__details {
       display: none;
+    }
+  }
+}
+
+.theme--dark.v-table thead th {
+  background-color: #424242;
+}
+
+.theme--light.v-table thead th {
+  background-color: #ffffff;
+}
+
+/* Theme */
+.fixed-header {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  table {
+    table-layout: fixed;
+  }
+
+  th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+    }
+  }
+
+  tr.v-datatable__progress {
+    th {
+      // top: 56px;
+      height: 1px;
+    }
+  }
+
+  .v-table__overflow {
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow-x: auto;
+    overflow-y: auto;
+    // overflow: auto;
+    // height: 100%;
+  }
+
+  .v-datatable.v-table {
+    flex-grow: 0;
+    flex-shrink: 1;
+
+    .v-datatable__actions {
+      flex-wrap: nowrap;
+
+      .v-datatable__actions__pagination {
+        white-space: nowrap;
+      }
     }
   }
 }

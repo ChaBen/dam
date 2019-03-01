@@ -3,8 +3,6 @@
 
     <Dam-header />
 
-    <Dam-aside />
-
     <v-content class="full-height">
       <v-container class="full-height" fluid pa-0>
         <router-view />
@@ -15,13 +13,12 @@
 </template>
 
 <script>
-import DamAside from '@/components/common/aside'
 import DamHeader from '@/components/common/header'
 
 export default {
   name: 'App',
   components: {
-    DamAside, DamHeader
+    DamHeader
   }
 }
 </script>
