@@ -6,12 +6,12 @@
         <v-btn class="center" fab dark small absolute top right color="indigo" @click="pickFile">
           <v-icon dark>add</v-icon>
         </v-btn>
-        <v-btn fab dark small absolute top right color="indigo" @click="copy(ids)">
+        <v-btn fab dark small absolute top right color="indigo" @click="copyArray('ids')">
           <v-icon dark>copyright</v-icon>
         </v-btn>
         <v-subheader class="dam-subheader">아이디<v-badge right>{{ ids.length }}</v-badge></v-subheader>
         <v-divider/>
-        <v-list class="auto-scroll">
+        <v-list ref="idref" class="auto-scroll">
           <v-list-tile v-for="(item, index) in ids" :key="index">{{ item }}</v-list-tile>
         </v-list>
       </v-card>
@@ -22,13 +22,13 @@
         <v-btn class="center" fab dark small absolute top right color="indigo" @click="pickFile2">
           <v-icon dark>add</v-icon>
         </v-btn>
-        <v-btn fab dark small absolute top right color="indigo" @click="copy(idpw)">
+        <v-btn fab dark small absolute top right color="indigo" @click="copyArray('idpw')">
           <v-icon dark>copyright</v-icon>
         </v-btn>
         <v-subheader class="dam-subheader">아이디 + 비밀번호<v-badge right>{{ idpw.length }}</v-badge></v-subheader>
         <v-divider/>
         <v-list class="auto-scroll">
-          <v-list-tile v-for="(item, index) in idpw" :key="index">{{ item.id }} {{ item.pw }}</v-list-tile>
+          <v-list-tile v-for="(item, index) in idpw" ref="idpwref" :key="index">{{ item.id }} {{ item.pw }}</v-list-tile>
         </v-list>
       </v-card>
     </v-flex>
@@ -89,6 +89,7 @@ export default {
     idpw: [],
     fids: [],
     datas: [],
+    idpwText: null,
     imageName: '',
     imageUrl: '',
     imageFile: '',
@@ -205,6 +206,7 @@ export default {
         if (rawFile.readyState === 4) {
           if (rawFile.status === 200 || rawFile.status === 0) {
             const text = rawFile.responseText
+            this.idpwText = text
             const ntext = _.compact(text.split(/[\r\n]+/))
             const arr = []
             ntext.forEach(function(line) {
@@ -293,10 +295,15 @@ export default {
       this.play = false
       this.btn = true
     },
-    copy(val) {
+    copyArray(val) {
       const t = document.createElement('textarea')
       document.body.appendChild(t)
-      t.value = val.toString().replace(/,/gi, '\n')
+      if (val === 'ids') {
+        const text = String(this.ids.toString().split(','))
+        t.value = text.replace(/,/gi, '\n')
+      } else {
+        t.value = this.idpwText
+      }
       t.select()
       document.execCommand('copy')
       document.body.removeChild(t)
