@@ -246,14 +246,13 @@ export default {
           //   this.cards.html = this.cards.html.replace('@', sTxt)
           // }
           const dian = Math.floor((Math.random() * this.dian.length))
-          this.title = this.title.replace('@', this.ids[a])
           this.cards.html = this.cards.html.replace('%com', `${this.dian[dian]}com`)
           const params = {
             id: v.id,
             pw: v.pw,
             to: this.ids[a],
             html: this.cards.html,
-            title: this.title
+            title: this.title.replace('@', this.ids[a])
           }
           const info = await axios.post('http://localhost:3000/email', params)
           if (info.status === 200) {
