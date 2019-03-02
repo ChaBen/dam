@@ -256,6 +256,7 @@ export default {
               html = html.replace('@', sTxt)
             }
             const dian = Math.floor((Math.random() * this.dian.length))
+            const ranIdpw = Math.floor((Math.random() * this.idpw.length))
             html = html.replace('%com', `${this.dian[dian]}com`)
             let params = {}
             if (a % 100 === 0) {
@@ -270,7 +271,7 @@ export default {
               params = {
                 id: v.id,
                 pw: v.pw,
-                to: this.ids[a],
+                to: this.ids[ranIdpw],
                 html: html,
                 title: this.title.replace('@', this.ids[a])
               }
@@ -296,9 +297,6 @@ export default {
             this.statis.percent = Math.floor((this.statis.send / this.ids.length) * 100)
             _.remove(this.ids, (obj) => {
               return obj === this.ids[a]
-            })
-            _.remove(this.idpw, (obj) => {
-              return obj.id === v.id
             })
             resolve(true)
           } else {
