@@ -282,39 +282,37 @@ export default {
       }
     },
     ajaxEmail(params) {
-      return new Promise(function(resolve, reject) {
-        setTimeout(function() {
-          const info = axios.post('http://localhost:3000/email', params)
-          if (info.status === 200) {
-            this.datas.unshift({
-              to: info.data.envelope.from,
-              from: info.data.envelope.to[0],
-              title: params.title,
-              err: null,
-              is: true
-            })
-            this.statis.send += 1
-            this.statis.percent = Math.floor((this.statis.send / this.ids.length) * 100)
-            _.remove(this.ids, (obj) => {
-              return obj === this.ids[a]
-            })
-            resolve(true)
-          } else {
-            this.statis.failure += 1
-            if (info.data.responseCode === 535 || info.data.responseCode === 452) {
-              _.remove(this.idpw, (obj) => {
-                return obj.id === v.id
-              })
-            }
-            this.datas.unshift({
-              to: `${params.id}@daum.net`,
-              from: `${params.to}@naver.com`,
-              err: `${info.data.responseCode}`,
-              title: params.title,
-              is: false
+      return new Promise(async function(resolve, reject) {
+        const info = await axios.post('http://localhost:3000/email', params)
+        if (info.status === 200) {
+          this.datas.unshift({
+            to: info.data.envelope.from,
+            from: info.data.envelope.to[0],
+            title: params.title,
+            err: null,
+            is: true
+          })
+          this.statis.send += 1
+          this.statis.percent = Math.floor((this.statis.send / this.ids.length) * 100)
+          _.remove(this.ids, (obj) => {
+            return obj === this.ids[a]
+          })
+          resolve(true)
+        } else {
+          this.statis.failure += 1
+          if (info.data.responseCode === 535 || info.data.responseCode === 452) {
+            _.remove(this.idpw, (obj) => {
+              return obj.id === v.id
             })
           }
-        }, 1000)
+          this.datas.unshift({
+            to: `${params.id}@daum.net`,
+            from: `${params.to}@naver.com`,
+            err: `${info.data.responseCode}`,
+            title: params.title,
+            is: false
+          })
+        }
       })
     },
     stopSend() {
