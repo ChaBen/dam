@@ -222,7 +222,7 @@ export default {
       return Math.floor((Math.random() * num))
     },
     arrEach(num) {
-      return new Peomise((resolve, reject) => {
+      return new Promise((resolve, reject) => {
         const cArr = _.chunk(this.ids, this.leng)
         const cIds = cArr[num]
         const all = []
