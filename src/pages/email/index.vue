@@ -276,7 +276,7 @@ export default {
                 title: this.title.replace('@', this.ids[a])
               }
             }
-            if (await this.ajaxEmail(params)) break
+            if (this.ajaxEmail(params)) break
           }
         }
       }
@@ -314,7 +314,7 @@ export default {
               is: false
             })
           }
-        }, 100)
+        }, 1000)
       })
     },
     stopSend() {
