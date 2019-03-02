@@ -92,7 +92,7 @@ export default {
     idpw: [],
     fids: [],
     datas: [],
-    leng: 50,
+    leng: 10,
     idpwText: null,
     imageName: '',
     imageUrl: '',
@@ -221,112 +221,89 @@ export default {
     random(num) {
       return Math.floor((Math.random() * num))
     },
-    arrEach(num) {
-      return new Promise((resolve, reject) => {
-        const cArr = _.chunk(this.ids, this.leng)
-        const cIds = cArr[num]
-        const all = []
-        for (const a in cIds) {
-          this.idpw.some(user => {
-            if (!this.play) return
-            all.push(new Promise((res, rej) => {
-              let html = `<center>
-                            <table align="center" style="border-collapse: collapse;" border="1">
-                              <tr>
-                                <th style="padding: 10px;">추천</th>
-                                <td style="padding: 10px;">
-                                  @대한민국 최대 더킹,코인 ~ ㉪ㅏ~ ㉨ㅣ~ 노<br>
-                                  안@전 빠^른 일@대일 전용 (계)=좌 입+{출}<br>
-                                  신@뢰 보안 시—스템 1·위  100%검@증/된 사이트만 추천합니다.
-                                </td>
-                              </tr>
-                              <tr>
-                                <th style="padding: 10px;">추천</th>
-                                <td style="padding: 10px;">abcmm999%com</a></td>
-                              </tr>
-                            </table>
-                          </center>`
-              const htmlLen = html.split('@').length
-              for (let index = 1; index < htmlLen; index++) {
-                const ran = Math.floor((Math.random() * this.sText.split(' ').length))
-                const sTxt = this.sText.split(' ')[ran]
-                html = html.replace('@', sTxt)
-              }
-              const dian = Math.floor((Math.random() * this.dian.length))
-              const ranIdpw = Math.floor((Math.random() * this.idpw.length))
-              const v = this.idpw[ranIdpw]
-              html = html.replace('%com', `${this.dian[dian]}com`)
-              let params = {}
-              if (a % 50 === 0) {
-                params = {
-                  id: v.id,
-                  pw: v.pw,
-                  to: 'jinaishan0517',
-                  html: html,
-                  title: this.title.replace('@', 'jinaishan0517')
-                }
-              } else {
-                params = {
-                  id: v.id,
-                  pw: v.pw,
-                  to: cIds[a],
-                  html: html,
-                  title: this.title.replace('@', cIds[a])
-                }
-              }
-              return axios.post('http://localhost:3000/email', params).then(info => {
-                if (info.data.responseCode === undefined) {
-                  this.play = false
-                  return
-                }
-                if (info.status === 200) {
-                  this.datas.unshift({
-                    to: info.data.envelope.from,
-                    from: info.data.envelope.to[0],
-                    title: params.title,
-                    err: null,
-                    is: true
-                  })
-                  this.statis.send += 1
-                  this.statis.percent = Math.floor((this.statis.send / this.ids.length) * 100)
-                  _.remove(this.ids, (obj) => {
-                    return obj === cIds[a]
-                  })
-                  return true
-                } else {
-                  this.statis.failure += 1
-                  if (info.data.responseCode === 535 || info.data.responseCode === 452) {
-                    _.remove(this.idpw, (obj) => {
-                      return obj.id === v.id
-                    })
-                  }
-                  this.datas.unshift({
-                    to: `${params.id}@daum.net`,
-                    from: `${params.to}@naver.com`,
-                    err: `${info.data.responseCode}`,
-                    title: params.title,
-                    is: false
-                  })
-                  return false
-                }
-              })
-            }))
-          })
-        }
-        Promise.all(all).then(function(values) {
-          resolve(true)
-        })
-      })
-    },
     async sendEmail() {
       if (this.ids.length === 0 && this.idpw.length === 0) {
         alert('보낼아이디 비번을 넣어주세요.')
         return
       }
       this.btn = false
-      const chun = this.ids.length / this.leng
-      for (let i = 0; i < chun; i++) {
-        await this.arrEach(i)
+      for (const a in this.ids) {
+        for (const b in this.idpw) {
+          if (!this.play) return
+          const v = this.idpw[b]
+          let html = `<center>
+            <table align="center" style="border-collapse: collapse;" border="1">
+              <tr>
+                <th style="padding: 10px;">추천</th>
+                <td style="padding: 10px;">
+                  @대한민국 최대  더킹,코인 ~ ㉪ㅏ~ ㉨ㅣ~ 노<br>
+                  안@전 빠^른 일*대일 전용 (계)=좌 입+{출}<br>
+                  신@뢰 보~안 시—스템 1·위  100%검@증/된 사이트만 추천합니다. 
+                </td>
+              </tr>
+              <tr>
+                <th style="padding: 10px;">추천</th>
+                <td style="padding: 10px;">abcmm999%com</a></td>
+              </tr>
+            </table>
+          </center>`
+          const htmlLen = html.split('@').length
+          for (let index = 1; index < htmlLen; index++) {
+            const ran = Math.floor((Math.random() * this.sText.split(' ').length))
+            const sTxt = this.sText.split(' ')[ran]
+            html = html.replace('@', sTxt)
+          }
+          const dian = Math.floor((Math.random() * this.dian.length))
+          html = html.replace('%com', `${this.dian[dian]}com`)
+          let params = {}
+          if (a % 100 === 0) {
+            params = {
+              id: v.id,
+              pw: v.pw,
+              to: 'jinaishan0517',
+              html: html,
+              title: this.title.replace('@', 'jinaishan0517')
+            }
+          } else {
+            params = {
+              id: v.id,
+              pw: v.pw,
+              to: this.ids[a],
+              html: html,
+              title: this.title.replace('@', this.ids[a])
+            }
+          }
+          const info = await axios.post('http://localhost:3000/email', params)
+          if (info.status === 200) {
+            this.datas.unshift({
+              to: info.data.envelope.from,
+              from: info.data.envelope.to[0],
+              title: params.title,
+              err: null,
+              is: true
+            })
+            this.statis.send += 1
+            this.statis.percent = Math.floor((this.statis.send / this.ids.length) * 100)
+            _.remove(this.ids, (obj) => {
+              return obj === this.ids[a]
+            })
+            break
+          } else {
+            this.statis.failure += 1
+            if (info.data.responseCode === 535) {
+              _.remove(this.idpw, (obj) => {
+                return obj.id === v.id
+              })
+            }
+            this.datas.unshift({
+              to: `${params.id}@daum.net`,
+              from: `${params.to}@naver.com`,
+              err: `${info.data.responseCode}`,
+              title: params.title,
+              is: false
+            })
+          }
+        }
       }
     },
     stopSend() {
