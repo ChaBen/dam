@@ -37,13 +37,16 @@
         <v-flex>
           <v-card>
             <v-layout row pa-3>
-              <v-flex xs4 text-xs-center>
+              <v-flex xs3 text-xs-center>
                 <span class="title">보낸수: <span class="blue--text">{{ statis.send | cur }}개</span></span>
               </v-flex>
-              <v-flex xs4 text-xs-center>
+              <v-flex xs3 text-xs-center>
                 <span class="title">실패수: <span class="pink--text">{{ statis.failure | cur }}개</span></span>
               </v-flex>
-              <v-flex xs4 text-xs-center>
+              <v-flex xs3 text-xs-center>
+                <span class="title">총개수: <span class="pink--text">{{ ids.length }}개</span></span>
+              </v-flex>
+              <v-flex xs3 text-xs-center>
                 <span class="title">페센트: <span class="orange--text">{{ statis.percent }}%</span></span>
               </v-flex>
             </v-layout>
