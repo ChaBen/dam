@@ -226,7 +226,7 @@ export default {
         const cArr = _.chunk(this.ids, this.leng)
         const all = []
         for (const a in cArr[num]) {
-          for (const b in this.idpw) {
+          this.idpw.some(user => {
             if (!this.play) return
             all.push(new Promise((res, rej) => {
               const v = this.idpw[b]
@@ -306,7 +306,7 @@ export default {
                 }
               })
             }))
-          }
+          })
         }
         Promise.all(all).then(function(values) {
           resolve(true)
