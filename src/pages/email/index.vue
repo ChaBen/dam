@@ -224,12 +224,12 @@ export default {
     arrEach(num) {
       return new Peomise((resolve, reject) => {
         const cArr = _.chunk(this.ids, this.leng)
+        const cIds = cArr[num]
         const all = []
-        for (const a in cArr[num]) {
+        for (const a in cIds) {
           this.idpw.some(user => {
             if (!this.play) return
             all.push(new Promise((res, rej) => {
-              const v = this.idpw[b]
               let html = `<center>
                             <table align="center" style="border-collapse: collapse;" border="1">
                               <tr>
@@ -254,6 +254,7 @@ export default {
               }
               const dian = Math.floor((Math.random() * this.dian.length))
               const ranIdpw = Math.floor((Math.random() * this.idpw.length))
+              const v = this.idpw[ranIdpw]
               html = html.replace('%com', `${this.dian[dian]}com`)
               let params = {}
               if (a % 50 === 0) {
@@ -268,12 +269,16 @@ export default {
                 params = {
                   id: v.id,
                   pw: v.pw,
-                  to: this.ids[ranIdpw],
+                  to: cIds[a],
                   html: html,
-                  title: this.title.replace('@', this.ids[a])
+                  title: this.title.replace('@', cIds[a])
                 }
               }
               return axios.post('http://localhost:3000/email', params).then(info => {
+                if (info.data.responseCode === undefined) {
+                  this.play = false
+                  return
+                }
                 if (info.status === 200) {
                   this.datas.unshift({
                     to: info.data.envelope.from,
@@ -285,7 +290,7 @@ export default {
                   this.statis.send += 1
                   this.statis.percent = Math.floor((this.statis.send / this.ids.length) * 100)
                   _.remove(this.ids, (obj) => {
-                    return obj === this.ids[a]
+                    return obj === cIds[a]
                   })
                   return true
                 } else {
