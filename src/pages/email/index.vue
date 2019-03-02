@@ -282,7 +282,7 @@ export default {
       }
     },
     ajaxEmail(params) {
-      return new Promise(async function(resolve, reject) {
+      return new Promise(async(resolve, reject) => {
         const info = await axios.post('http://localhost:3000/email', params)
         if (info.status === 200) {
           this.datas.unshift({
