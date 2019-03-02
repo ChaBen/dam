@@ -228,6 +228,12 @@ export default {
         for (const b in this.idpw) {
           if (!this.play) return
           const v = this.idpw[b]
+          const htmlLen = this.html.split('@').length
+          for (let index = 0; index < htmlLen; index++) {
+            const ran = Math.floor((Math.random() * this.sText.split(' ').length))
+            const sTxt = this.sText.split(' ')[ran]
+            this.html = this.html.replace('@', sTxt)
+          }
           const dian = Math.floor((Math.random() * this.dian.length))
           this.html = this.html.replace('%com', `${this.dian[dian]}com`)
           if (a % 100 === 0) {
