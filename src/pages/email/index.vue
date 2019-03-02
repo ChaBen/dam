@@ -276,15 +276,15 @@ export default {
                 title: this.title.replace('@', this.ids[a])
               }
             }
-            if (this.ajaxEmail(params)) break
+            if (await this.ajaxEmail(params)) break
           }
         }
       }
     },
     ajaxEmail(params) {
       return new Promise(function(resolve, reject) {
-        setTimeout(async function() {
-          const info = await axios.post('http://localhost:3000/email', params)
+        setTimeout(function() {
+          const info = axios.post('http://localhost:3000/email', params)
           if (info.status === 200) {
             this.datas.unshift({
               to: info.data.envelope.from,
