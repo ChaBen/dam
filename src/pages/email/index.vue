@@ -36,18 +36,18 @@
       <v-layout column fill-height>
         <v-flex>
           <v-card>
-            <v-layout row pa-3>
+            <v-layout row style="padding: 13px 0;">
               <v-flex xs3 text-xs-center>
-                <span class="title">보낸수: <span class="green--text">{{ statis.send | cur }}개</span></span>
+                <span class="subheader">보낸수: <span class="green--text">{{ statis.send | cur }}개</span></span>
               </v-flex>
               <v-flex xs3 text-xs-center>
-                <span class="title">실패수: <span class="pink--text">{{ statis.failure | cur }}개</span></span>
+                <span class="subheader">실패수: <span class="pink--text">{{ statis.failure | cur }}개</span></span>
               </v-flex>
               <v-flex xs3 text-xs-center>
-                <span class="title">총개수: <span class="blue--text">{{ ids.length | cur }}개</span></span>
+                <span class="subheader">총개수: <span class="blue--text">{{ ids.length | cur }}개</span></span>
               </v-flex>
               <v-flex xs3 text-xs-center>
-                <span class="title">페센트: <span class="orange--text">{{ statis.percent }}%</span></span>
+                <span class="subheader">페센트: <span class="orange--text">{{ statis.percent }}%</span></span>
               </v-flex>
             </v-layout>
           </v-card>
@@ -62,7 +62,6 @@
             </v-btn>
             <v-data-table :headers="headers" :items="datas" class="fixed-header v-table__overflow" style="max-height: calc(100vh - 144px); backface-visibility: hidden;" hide-actions>
               <template slot="items" slot-scope="props">
-                <td class="text-xs-center">{{ props.index+1 }}</td>
                 <td class="text-xs-center">{{ props.item.to }}</td>
                 <td class="text-xs-center">{{ props.item.from }}</td>
                 <td class="text-xs-center">{{ props.item.title }}</td>
@@ -128,14 +127,15 @@ export default {
       { text: '페센트', align: 'center', sortable: false, value: 'percent' }
     ],
     headers: [
-      { text: '개수', align: 'center', sortable: false, value: 'index', width: 80 },
       { text: '보낸아이디', align: 'center', sortable: false, value: 'id' },
       { text: '받은아이디', align: 'center', sortable: false, value: 'sid' },
       { text: '타이틀', align: 'center', sortable: false, value: 'title' },
-      { text: '애러코드', align: 'center', sortable: false, value: 'err', width: 80 },
-      { text: '성공여부', align: 'center', sortable: false, value: 'is', width: 80 }
+      { text: '애러코드', align: 'center', sortable: false, value: 'err', width: 100 },
+      { text: '성공여부', align: 'center', sortable: false, value: 'is', width: 100 }
     ]
   }),
+  created() {
+  },
   methods: {
     pickFile() {
       this.$refs.image.click()
