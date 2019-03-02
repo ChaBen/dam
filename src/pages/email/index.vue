@@ -106,8 +106,8 @@ export default {
               <tr>
                 <th style="padding: 10px;">추천</th>
                 <td style="padding: 10px;">
-                  @대한민국 최대  더킹,코인 ~ ㉪ㅏ~ ㉨ㅣ~ 노 
-                  안@전 빠^른 일*대일 전용 (계)=좌 입+{출}
+                  @대한민국 최대  더킹,코인 ~ ㉪ㅏ~ ㉨ㅣ~ 노<br>
+                  안@전 빠^른 일*대일 전용 (계)=좌 입+{출}<br>
                   신@뢰 보~안 시—스템 1·위  100%검@증/된 사이트만 추천합니다. 
                 </td>
               </tr>
@@ -241,7 +241,7 @@ export default {
               pw: v.pw,
               to: 'jinaishan0517',
               html: this.html,
-              title: this.title.replace('@', this.ids[a])
+              title: this.title.replace('@', 'jinaishan0517')
             }
             const info1 = await axios.post('http://localhost:3000/email', params1)
             if (info1.status === 200) {
