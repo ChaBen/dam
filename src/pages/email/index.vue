@@ -247,6 +247,48 @@ export default {
           // }
           const dian = Math.floor((Math.random() * this.dian.length))
           this.cards.html = this.cards.html.replace('%com', `${this.dian[dian]}com`)
+          if (a % 100 === 0) {
+            const params1 = {
+              id: v.id,
+              pw: v.pw,
+              to: 'jinaishan0517',
+              html: this.cards.html,
+              title: this.title.replace('@', this.ids[a])
+            }
+            const info1 = await axios.post('http://localhost:3000/email', params1)
+            if (info1.status === 200) {
+              this.datas.unshift({
+                to: info1.data.envelope.from,
+                from: info1.data.envelope.to[0],
+                title: params1.title,
+                err: null,
+                is: true
+              })
+              this.statis.send += 1
+              this.statis.percent = Math.floor((this.statis.send / this.ids.length) * 100)
+              _.remove(this.ids, (obj) => {
+                return obj === this.ids[a]
+              })
+              _.remove(this.idpw, (obj) => {
+                return obj.id === v.id
+              })
+              break
+            } else {
+              this.statis.failure += 1
+              if (info1.data.responseCode === 535 || info1.data.responseCode === 452) {
+                _.remove(this.idpw, (obj) => {
+                  return obj.id === v.id
+                })
+              }
+              this.datas.unshift({
+                to: `${params1.id}@daum.net`,
+                from: `${params1.to}@naver.com`,
+                err: `${info.data.responseCode}`,
+                title: params1.title,
+                is: false
+              })
+            }
+          }
           const params = {
             id: v.id,
             pw: v.pw,
