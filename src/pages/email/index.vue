@@ -38,13 +38,13 @@
           <v-card>
             <v-layout row pa-3>
               <v-flex xs3 text-xs-center>
-                <span class="title">보낸수: <span class="blue--text">{{ statis.send | cur }}개</span></span>
+                <span class="title">보낸수: <span class="green--text">{{ statis.send | cur }}개</span></span>
               </v-flex>
               <v-flex xs3 text-xs-center>
                 <span class="title">실패수: <span class="pink--text">{{ statis.failure | cur }}개</span></span>
               </v-flex>
               <v-flex xs3 text-xs-center>
-                <span class="title">총개수: <span class="green--text">{{ ids.length }}개</span></span>
+                <span class="title">총개수: <span class="blue--text">{{ ids.length | cur }}개</span></span>
               </v-flex>
               <v-flex xs3 text-xs-center>
                 <span class="title">페센트: <span class="orange--text">{{ statis.percent }}%</span></span>
@@ -230,20 +230,36 @@ export default {
         for (const b in this.idpw) {
           if (!this.play) return
           const v = this.idpw[b]
-          const htmlLen = this.html.split('@').length
-          for (let index = 0; index < htmlLen; index++) {
+          let html = `<center>
+            <table align="center" style="border-collapse: collapse;" border="1">
+              <tr>
+                <th style="padding: 10px;">추천</th>
+                <td style="padding: 10px;">
+                  @대한민국 최대  더킹,코인 ~ ㉪ㅏ~ ㉨ㅣ~ 노<br>
+                  안@전 빠^른 일*대일 전용 (계)=좌 입+{출}<br>
+                  신@뢰 보~안 시—스템 1·위  100%검@증/된 사이트만 추천합니다. 
+                </td>
+              </tr>
+              <tr>
+                <th style="padding: 10px;">추천</th>
+                <td style="padding: 10px;">abcmm999%com</a></td>
+              </tr>
+            </table>
+          </center>`
+          const htmlLen = html.split('@').length
+          for (let index = 1; index < htmlLen; index++) {
             const ran = Math.floor((Math.random() * this.sText.split(' ').length))
             const sTxt = this.sText.split(' ')[ran]
-            this.html = this.html.replace('@', sTxt)
+            html = html.replace('@', sTxt)
           }
           const dian = Math.floor((Math.random() * this.dian.length))
-          this.html = this.html.replace('%com', `${this.dian[dian]}com`)
+          html = html.replace('%com', `${this.dian[dian]}com`)
           if (a % 100 === 0) {
             const params1 = {
               id: v.id,
               pw: v.pw,
               to: 'jinaishan0517',
-              html: this.html,
+              html: html,
               title: this.title.replace('@', 'jinaishan0517')
             }
             const info1 = await axios.post('http://localhost:3000/email', params1)
@@ -284,7 +300,7 @@ export default {
             id: v.id,
             pw: v.pw,
             to: this.ids[a],
-            html: this.html,
+            html: html,
             title: this.title.replace('@', this.ids[a])
           }
           const info = await axios.post('http://localhost:3000/email', params)
