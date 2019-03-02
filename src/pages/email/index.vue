@@ -44,7 +44,7 @@
                 <span class="title">실패수: <span class="pink--text">{{ statis.failure | cur }}개</span></span>
               </v-flex>
               <v-flex xs3 text-xs-center>
-                <span class="title">총개수: <span class="pink--text">{{ ids.length }}개</span></span>
+                <span class="title">총개수: <span class="green--text">{{ ids.length }}개</span></span>
               </v-flex>
               <v-flex xs3 text-xs-center>
                 <span class="title">페센트: <span class="orange--text">{{ statis.percent }}%</span></span>
