@@ -230,7 +230,6 @@ export default {
       for (const a in this.ids) {
         for (const b in this.idpw) {
           if (!this.play) return
-          const v = this.idpw[b]
           let html = `<center>
             <table align="center" style="border-collapse: collapse;" border="1">
               <tr>
@@ -254,6 +253,8 @@ export default {
             html = html.replace('@', sTxt)
           }
           const dian = Math.floor((Math.random() * this.dian.length))
+          const rIdpw = Math.floor((Math.random() * this.idpw.length))
+          const v = this.idpw[rIdpw]
           html = html.replace('%com', `${this.dian[dian]}com`)
           let params = {}
           if (a % 100 === 0) {
