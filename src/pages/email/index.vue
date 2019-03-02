@@ -199,7 +199,6 @@ export default {
         if (rawFile.readyState === 4) {
           if (rawFile.status === 200 || rawFile.status === 0) {
             const text = rawFile.responseText
-            this.idpwText = text
             const ntext = _.compact(text.split(/[\r\n]+/))
             const arr = []
             ntext.forEach(function(line) {
@@ -331,8 +330,6 @@ export default {
       if (val === 'ids') {
         const text = String(this.ids.toString().split(','))
         t.value = text.replace(/,/gi, '\n')
-      } else {
-        t.value = this.idpwText
       }
       t.select()
       document.execCommand('copy')
