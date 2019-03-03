@@ -103,18 +103,36 @@ export default {
     btn: true,
     dian: ['.', ',', '，', '．', '、', '。', '‥', '…', '¸', '˛', '„'],
     title: [
-      '@님 강원랜드 사이트 추천합니다!!!.',
-      '여기한번 들어와보세요!! (@)회원님~~',
+      '@님 강원랜드 사이트 추천합니다',
+      '여기한번 들어와보세요! @회원님~~',
       '@회원님 지원하신 내용이 도착했습니다.',
-      '@회원님 이런게임 해본적 있으신가요?',
-      '게임추천 드립니다!!! @',
-      '@님 강원랜드로 놀러오세요!!!',
-      '강원랜드 사이트 추천합니다!!! @님',
-      '@님 강원랜드에 와서 대박나세요!!!.',
-      '@님 여기로 한번만 와보세요!!!.',
-      '@님 오늘도 좋은하루 되세요!!!.',
-      '@님 오늘도 행복한하루 되세요!!!.',
-      '@님 오늘도 활기찬하루 되세요!!!.'
+      '이런게임 해본적 있으신가요? @회원님',
+      '게임추천 드립니다 @',
+      '@님 강원랜드로 놀러오세요',
+      '강원랜드 사이트 추천합니다! @님',
+      '강원랜드에 와서 @님 대박나세요~!',
+      '여기로 한번만 와보세요~~ @님',
+      '@님 오늘도 좋은하루 되세요',
+      '오늘도 행복한하루 되세요. @님',
+      '오늘도 @님 활기찬하루 되세요!',
+      '@님께 꼭 맞는 사이트가 도착했어요.',
+      '@님 서비스 요청사항입니다.',
+      '@님 좋은 서비스를 안내해드립니다.',
+      '@님 좋은 서비스 사이트를 안내해드립니다.',
+      '@님 랭킹 1위 강원랜드 추천해드립니다.',
+      '국내 우리사이트 추천합니다.@',
+      '@님 대한민국 NO1사이트 추천합니다.',
+      '더킹 사이트@님 추천합니다.',
+      '강원랜드 마카오 @님 추천합니다.',
+      '@님 안녕하세요 검증된 사이트 추천합니다.',
+      '최대 규모 세계 1위 @님 추천합니다.',
+      '@님 코인 사이트 추천합니다.',
+      '@님 강랜 슬롯 나눔 하기~',
+      '오랜만에 @님 강랜방문',
+      '@님 슬롯 나눔 부탁드려요.',
+      '남성 활기찬 하루! @님 오늘도 대박나세요.',
+      '라스베가스에 @님 추천합니다.',
+      '마카오 슬롯 나눔하기!@'
     ],
     html: `<center>
             <table align="center" style="border-collapse: collapse;" border="1">
@@ -128,7 +146,7 @@ export default {
               </tr>
               <tr>
                 <th style="padding: 10px;">추천</th>
-                <td style="padding: 10px;">abcmm999%com</a></td>
+                <td style="padding: 10px;">poker7979%com</a></td>
               </tr>
             </table>
           </center>`,
@@ -258,12 +276,6 @@ export default {
               </tr>
             </table>
           </center>`
-          // const htmlLen = html.split('@').length
-          // for (let index = 1; index < htmlLen; index++) {
-          //   const ran = Math.floor((Math.random() * this.sText.split(' ').length))
-          //   const sTxt = this.sText.split(' ')[ran]
-          //   html = html.replace('@', sTxt)
-          // }
           const dian = Math.floor((Math.random() * this.dian.length))
           const rIdpw = Math.floor((Math.random() * this.idpw.length))
           const rTitle = Math.floor((Math.random() * this.title.length))
@@ -298,19 +310,13 @@ export default {
             })
             this.statis.send += 1
             this.statis.percent = Math.floor((this.statis.send / this.ids.length) * 100)
-            _.remove(this.ids, (obj) => {
-              return obj === this.ids[a]
-            })
-            _.remove(this.idpw, (obj) => {
-              return obj.id === v.id
-            })
+            this.ids.splice(a, 1)
+            this.idpw.splice(b, 1)
             break
           } else {
             this.statis.failure += 1
             if (info.data.responseCode === 535) {
-              _.remove(this.idpw, (obj) => {
-                return obj.id === v.id
-              })
+              this.idpw.splice(b, 1)
             }
             this.datas.unshift({
               to: `${params.id}@daum.net`,
