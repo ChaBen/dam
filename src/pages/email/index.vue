@@ -202,7 +202,7 @@ export default {
         if (rawFile.readyState === 4) {
           if (rawFile.status === 200 || rawFile.status === 0) {
             const text = rawFile.responseText
-            this.ids = text.split(/[\r\n]+/)
+            this.ids = _.uniq(text.split(/[\r\n]+/))
           }
         }
       }
