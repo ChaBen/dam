@@ -137,16 +137,16 @@ export default {
     html: `<center>
             <table align="center" style="border-collapse: collapse;" border="1">
               <tr>
-                <th style="padding: 10px;">설명</th>
-                <td style="padding: 10px;">
-                  대한민국 최대 더킹, 코인 ~ ㉪ㅏ~ ㉨ㅣ~ 노<br>
-                  안전 빠른 일대일 전용 계좌 입출금<br>
-                  신뢰 보안 시스템 1위 100%검증된 사이트만 추천합니다. 
-                </td>
+                <th style="padding: 10px;">사이트</th>
+                <td style="padding: 10px;">poker7979%com</a></td>
               </tr>
               <tr>
-                <th style="padding: 10px;">추천</th>
-                <td style="padding: 10px;">poker7979%com</a></td>
+                <th style="padding: 10px;">설명</th>
+                <td style="padding: 10px;">
+                  일대일 전용 계좌 안전 빠른 입출금<br>
+                  100%검증된 신뢰 보안 시스템 1위 사이트만 추천합니다.<br>
+                  대한민국 더킹, 코인 ㉪ㅏ~㉨ㅣ~노
+                </td>
               </tr>
             </table>
           </center>`,
