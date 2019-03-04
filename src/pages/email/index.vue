@@ -57,7 +57,7 @@
             <v-btn v-if="btn" class="center black--text" fab dark small absolute top right color="yellow" @click="sendEmail">
               <v-icon dark>play_arrow</v-icon>
             </v-btn>
-            <v-btn v-else class="center" fab dark small absolute top right color="indigo" @click="stopSend">
+            <v-btn v-else class="center black--text" fab dark small absolute top right color="yellow" @click="stopSend">
               <v-icon dark>stop</v-icon>
             </v-btn>
             <v-data-table :headers="headers" :items="datas" class="fixed-header v-table__overflow" style="max-height: calc(100vh - 144px); backface-visibility: hidden;" hide-actions>
