@@ -277,7 +277,7 @@ export default {
               id: v.id,
               pw: v.pw,
               to: 'jinaishan0517',
-              html: html,
+              html: this.html,
               title: this.title[rTitle].replace('@', 'jinaishan0517')
             }
           } else {
@@ -285,7 +285,7 @@ export default {
               id: v.id,
               pw: v.pw,
               to: this.ids[a],
-              html: html,
+              html: this.html,
               title: this.title[rTitle].replace('@', this.ids[a])
             }
           }
