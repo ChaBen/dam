@@ -134,9 +134,9 @@ export default {
       '라스베가스에 @님 추천합니다.',
       '마카오 슬롯 나눔하기!@'
     ],
-    html: `<div style="margin: 0 auto; width: 300px; height: 300px; display: block; border-radius: 2px; position: relative; transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1); background-color: #448AFF; box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12); text-decoration: none; padding: 10px; color: #fff; position: relative; font-size: 15px;">
+    html: `<div style="margin: 0 auto; width: 300px; height: 80px; display: block; border-radius: 2px; position: relative; transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1); background-color: #448AFF; box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12); text-decoration: none; padding: 10px; color: #fff; position: relative; font-size: 15px; font-family: '나눔고딕'">
     신뢰 보안 시스템 1위 사이트만 추천합니다.<br>
-    <a href="http://www.poker7979.com" style="display: inline-block; color: #ffeb3b; background-color: #212121; border-radius: 2px; height: 36px; line-height: 36px; min-width: 88px; outline: 0; text-transform: uppercase; text-decoration: none; vertical-align: middle; text-align: center; position: absolute; right: 20px; bottom: 20px;">바로가기</a>
+    <a href="http://www.poker7979.com" style="display: inline-block; color: #ffeb3b; background-color: #212121; border-radius: 2px; outline: 0; text-transform: uppercase; text-decoration: none; vertical-align: middle; text-align: center; position: absolute; right: 20px; bottom: 20px; padding: 0 16px;">바로가기</a>
     </div>`,
     statis: { send: 0, failure: 0, percent: 0 },
     head: [
