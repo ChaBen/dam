@@ -134,22 +134,12 @@ export default {
       '라스베가스에 @님 추천합니다.',
       '마카오 슬롯 나눔하기!@'
     ],
-    html: `<center>
-            <table align="center" style="border-collapse: collapse;" border="1">
-              <tr>
-                <th style="padding: 10px;">사이트</th>
-                <td style="padding: 10px;">poker7979%com</a></td>
-              </tr>
-              <tr>
-                <th style="padding: 10px;">설명</th>
-                <td style="padding: 10px;">
-                  일대일 전용 계좌 안전 빠른 입출금<br>
-                  100%검증된 신뢰 보안 시스템 1위 사이트만 추천합니다.<br>
-                  대한민국 더킹, 코인 ㉪ㅏ~㉨ㅣ~노
-                </td>
-              </tr>
-            </table>
-          </center>`,
+    html: `<div style="width: 300px; height: 300px; display: block; border-radius: 2px; position: relative; transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1); background-color: #448AFF; box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12); text-decoration: none; padding: 10px; color: #fff; position: relative; font-size: 15px;">
+    일대일 전용 계좌 안전 빠른 입출금<br>
+    100%검증된 신뢰 보안 시스템 1위 사이트만 추천합니다.<br>
+    대한민국 더킹, 코인 ㉪ㅏ~㉨ㅣ~노
+    <a href="http://www.poker7979.com" style="display: inline-block; color: #ffeb3b; background-color: #212121; border-radius: 2px; height: 36px; line-height: 36px; min-width: 88px; outline: 0; text-transform: uppercase; text-decoration: none; vertical-align: middle; text-align: center; position: absolute; right: 20px; bottom: 20px;">바로가기</a>
+    </div>`,
     statis: { send: 0, failure: 0, percent: 0 },
     head: [
       { text: '보낸수', align: 'center', sortable: false, value: 'send' },
