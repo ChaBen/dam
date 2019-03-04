@@ -1,7 +1,7 @@
 <template>
   <v-layout row fullscreen fill-height pa-3>
     <v-flex xs8 mr-3>
-      <v-card class="card--flex-toolbar" height="100%">
+      <v-card class="card--flex-toolbar" height="100%" dark>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-layout column>
             <v-flex px-5 pt-5>
@@ -31,17 +31,14 @@
       </v-card>
     </v-flex>
     <v-flex xs8>
-      <v-card class="card--flex-toolbar" height="100%">
+      <v-card class="card--flex-toolbar" height="100%" dark>
+        <v-btn class="center black--text" fab dark small absolute top right color="yellow" style="right: 50px" @click="copyArray()">
+          <v-icon dark>copyright</v-icon>
+        </v-btn>
         <v-card-title class="title">아이디 ({{ ids.length }})</v-card-title>
-        <v-textarea
-          v-model="spids"
-          :disabled="loading"
-          class="auto-scroll"
-          row-height="30"
-          rows="20"
-          solo
-          no-resize
-          label="ids"/>
+        <v-list class="auto-scroll">
+          <v-list-tile v-for="item in ids" :key="item">{{ item }}</v-list-tile>
+        </v-list>
       </v-card>
     </v-flex>
   </v-layout>
@@ -98,6 +95,19 @@ export default {
           this.loading = false
         })
       }
+    },
+    copyArray() {
+      if (!this.ids.length) {
+        alert('아이디가 없습니다.')
+        return
+      }
+      const t = document.createElement('textarea')
+      document.body.appendChild(t)
+      const text = String(this.ids.toString().split(','))
+      t.value = text.replace(/,/gi, '\n')
+      t.select()
+      document.execCommand('copy')
+      document.body.removeChild(t)
     }
   }
 }

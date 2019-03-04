@@ -1,12 +1,12 @@
 <template>
   <v-layout class="full-height" row pa-4>
     <v-flex xs2 pr-2 class="full-height">
-      <v-card class="card--flex-toolbar full-height">
+      <v-card class="card--flex-toolbar full-height" dark>
         <input ref="image" type="file" style="display: none" @change="onFilePicked">
-        <v-btn class="center" fab dark small absolute top right color="indigo" @click="pickFile">
+        <v-btn class="center black--text" fab dark small absolute top right color="yellow" @click="pickFile">
           <v-icon dark>add</v-icon>
         </v-btn>
-        <v-btn fab dark small absolute top right color="indigo" @click="copyArray('ids')">
+        <v-btn class="black--text" fab dark small absolute top right color="yellow" style="right: 50px" @click="copyArray('ids')">
           <v-icon dark>copyright</v-icon>
         </v-btn>
         <v-subheader class="dam-subheader">아이디<v-badge right>{{ ids.length }}</v-badge></v-subheader>
@@ -17,12 +17,12 @@
       </v-card>
     </v-flex>
     <v-flex xs3 pr-2>
-      <v-card class="card--flex-toolbar full-height">
+      <v-card class="card--flex-toolbar full-height" dark>
         <input ref="image2" type="file" style="display: none" @change="onFilePicked2">
-        <v-btn class="center" fab dark small absolute top right color="indigo" @click="pickFile2">
+        <v-btn class="center black--text" fab small absolute top right color="yellow" @click="pickFile2">
           <v-icon dark>add</v-icon>
         </v-btn>
-        <v-btn fab dark small absolute top right color="indigo" @click="copyArray('idpw')">
+        <v-btn class="black--text" fab dark small absolute top right color="yellow" style="right: 50px" @click="copyArray('idpw')">
           <v-icon dark>copyright</v-icon>
         </v-btn>
         <v-subheader class="dam-subheader">아이디 + 비밀번호<v-badge right>{{ idpw.length }}</v-badge></v-subheader>
@@ -32,10 +32,10 @@
         </v-list>
       </v-card>
     </v-flex>
-    <v-flex xs8>
+    <v-flex xs7>
       <v-layout column fill-height>
         <v-flex>
-          <v-card>
+          <v-card dark>
             <v-layout row style="padding: 13px 0;">
               <v-flex xs3 text-xs-center>
                 <span class="subheader">보낸수: <span class="green--text">{{ statis.send | cur }}개</span></span>
@@ -44,7 +44,7 @@
                 <span class="subheader">실패수: <span class="pink--text">{{ statis.failure | cur }}개</span></span>
               </v-flex>
               <v-flex xs3 text-xs-center>
-                <span class="subheader">총개수: <span class="blue--text">{{ ids.length | cur }}개</span></span>
+                <span class="subheader">총개수: <span class="blue--text">{{ firstLength | cur }}개</span></span>
               </v-flex>
               <v-flex xs3 text-xs-center>
                 <span class="subheader">페센트: <span class="orange--text">{{ statis.percent }}%</span></span>
@@ -53,8 +53,8 @@
           </v-card>
         </v-flex>
         <v-flex style="height: calc(100% - 65px)">
-          <v-card>
-            <v-btn v-if="btn" class="center" fab dark small absolute top right color="indigo" @click="sendEmail">
+          <v-card dark>
+            <v-btn v-if="btn" class="center black--text" fab dark small absolute top right color="yellow" @click="sendEmail">
               <v-icon dark>play_arrow</v-icon>
             </v-btn>
             <v-btn v-else class="center" fab dark small absolute top right color="indigo" @click="stopSend">
@@ -90,7 +90,9 @@ export default {
     ids: [],
     idpw: [],
     fids: [],
+    id535: [],
     datas: [],
+    firstLength: 0,
     leng: 10,
     idpwText: null,
     imageName: '',
@@ -209,6 +211,7 @@ export default {
           if (rawFile.status === 200 || rawFile.status === 0) {
             const text = rawFile.responseText
             this.ids = _.uniq(text.split(/[\r\n]+/))
+            this.firstLength = _.uniq(text.split(/[\r\n]+/)).length
           }
         }
       }
@@ -222,6 +225,7 @@ export default {
           if (rawFile.status === 200 || rawFile.status === 0) {
             const text = rawFile.responseText
             const ntext = _.compact(text.split(/[\r\n]+/))
+            this.fids = ntext
             const arr = []
             ntext.forEach(function(line) {
               // Clean up whitespace/comments, and split into fields
@@ -248,27 +252,9 @@ export default {
       for (const a in this.ids) {
         for (const b in this.idpw) {
           if (!this.play) return
-          let html = `<center>
-                        <table align="center" style="border-collapse: collapse;" border="1">
-                          <tr>
-                            <th style="padding: 10px;">설명</th>
-                            <td style="padding: 10px;">
-                              대한민국 더킹, 코인 ㉪ㅏ~㉨ㅣ~노<br>
-                              일대일 전용 계좌 안전 빠른 입출금<br>
-                              100%검증된 신뢰 보안 시스템 1위 사이트만 추천합니다.
-                            </td>
-                          </tr>
-                          <tr>
-                            <th style="padding: 10px;">사이트</th>
-                            <td style="padding: 10px;">poker7979%com</a></td>
-                          </tr>
-                        </table>
-                      </center>`
-          const dian = Math.floor((Math.random() * this.dian.length))
           const rIdpw = Math.floor((Math.random() * this.idpw.length))
           const rTitle = Math.floor((Math.random() * this.title.length))
           const v = this.idpw[rIdpw]
-          html = html.replace('%com', `${this.dian[dian]}com`)
           let params = {}
           if (a % 100 === 0) {
             params = {
@@ -305,6 +291,7 @@ export default {
             this.statis.failure += 1
             if (info.data.responseCode === 535) {
               this.idpw.splice(b, 1)
+              this.id535.push(params.id)
             }
             this.datas.unshift({
               to: `${params.id}@daum.net`,
@@ -327,6 +314,10 @@ export default {
       if (val === 'ids') {
         const text = String(this.ids.toString().split(','))
         t.value = text.replace(/,/gi, '\n')
+      } else {
+        this.idpw.map(user => {
+          t.value += `${user.id} ${user.pw} \n`
+        })
       }
       t.select()
       document.execCommand('copy')
