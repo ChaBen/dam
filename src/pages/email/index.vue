@@ -261,7 +261,7 @@ export default {
           대@한@민@국 최@대  더킹,코인 ~ ㉪ㅏ @ ㉨ㅣ @ 노<br>
           안@전 빠@른 일@대일 {전}@{용} {계}@{좌} {입}@{출}<br>
           신@뢰 보@안 시@스템 1·위  100%검@증/된 사이트만 추천합니다.
-          <a href="http://poker7979.com" style="display: inline-block; color: #ffeb3b; background-color: #212121; border-radius: 2px; outline: 0; text-transform: uppercase; text-decoration: none; vertical-align: middle; text-align: center; position: absolute; right: 20px; bottom: 20px; padding: 0 16px;">바로가기</a>
+          접속 사/이트 복사 >>  poker7979 。com
           </div>`
           const htmlLen = html.split('@').length
           for (let index = 0; index < htmlLen; index++) {
