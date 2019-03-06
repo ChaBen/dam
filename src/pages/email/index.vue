@@ -264,7 +264,7 @@ export default {
           const rLink = Math.floor((Math.random() * this.link.length))
           const rTitle = Math.floor((Math.random() * this.title.length))
           var html = `<div style="margin: 0 auto; width: 300px; height: 140px; display: block; border-radius: 2px; position: relative; transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1); background-color: #448AFF; box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12); text-decoration: none; padding: 10px; color: #fff; position: relative; font-size: 15px; font-family: '나눔고딕'">
-          더킹,코인 ~ 보안@ 시스템@ 1·위  100%검증/된@ ㉪ㅏ ㉨ㅣ 노 추천합니다.<br>
+          강원랜드 사이트 추천합니다.<br>
           <a href="$" style="color: yellow; display: block; padding-top: 20px; text-align: center;">접속 사/이트</a>
           </div>`
           const htmlLen = html.split('@').length
