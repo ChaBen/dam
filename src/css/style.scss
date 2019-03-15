@@ -28,13 +28,6 @@ html, body, #app, .full-height {
     border-bottom: 1px solid rgba(0, 0, 0, .12);
   }
 }
-.dam-subheader {
-  position: relative;
-  .v-badge {
-    position: absolute;
-    right: 16px;
-  }
-}
 .is-mail {
   display: inline-block;
   width: 20px;
@@ -44,11 +37,6 @@ html, body, #app, .full-height {
   &.active {
     background-color: red;
   }
-}
-.v-btn.center {
-  right: auto;
-  left: 50%;
-  margin-left: -20px;
 }
 .dam-email {
   margin-bottom: 10px;
